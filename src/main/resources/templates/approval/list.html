@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page-title" title="결재 문서 리스트">
+    <title>결재 문서 리스트</title>
+    <link rel="stylesheet" th:href="@{/css/approval/list.css}">
+    <script src="/js/approval/list_style.js" data-dom-ready></script>
+</head>
+<body>
+<div class="approvalList_root" id="loadedContent">
+    <div class="approval-con">
+        <div class="approval-title">
+            <h1>결재 문서</h1>
+        </div>
+        <div class="approval-menu">
+            <div class="menu">
+                <ul>
+                    <li><a th:href="@{/approval/list/create}" data-ajax>상신함</a></li>
+                    <li><a th:href="@{/approval/list/read}" data-ajax>수신함</a></li>
+                    <li><a th:href="@{/approval/list/result}" data-ajax>결재함</a></li>
+                </ul>
+            </div>
+        </div>
+        <th:block th:if="${not #lists.isEmpty(approvalList)}">
+        <div class="approval-list">
+            <div class="approval-list-con">
+                <!-- <table border="1"> 이 부분 수정했습니다. (박상재) -->
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="th1">문서번호</th>
+                        <th class="th2">글제목</th>
+                        <th class="th3">상태</th>
+                        <th class="th4">작성시간</th>
+                        <th class="th5">기안자</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="approval :${approvalList}">
+                        <td th:text="${approval.Id}">Opions</td>
+                        <td class="td-title"><a th:href="@{/approval/detail/{id}(id=${approval.Id})}" data-ajax><span
+                                th:text="${approval.ApprovalTitle}"></span></a>
+                        </td>
+                        <td th:text="${approval.ApprovalStatus}">Opions</td>
+                        <td th:text="${#temporals.format(approval.createTime, 'yyyy-MM-dd HH:mm:ss')}">Opions</td>
+                        <td th:text="${approval.EmployeeEntity.employeeEmail}">Opions</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </th:block>
+        <div class="approval-menu">
+            <div class="menu">
+                <ul>
+                    <li><a th:href="@{/approval/write}" data-ajax>결재문서작성</a></li>
+                </ul>
+            </div>
+        </div>
+        <th:block th:if="${not #lists.isEmpty(approvalList)}">
+        <div class="approval-paging-con">
+            <div class="paging">
+                <ul>
+                    <li>
+                        <span th:if="${1==approvalList.pageable.pageNumber+1}" class="spanOff">처음</span>
+                        <span th:unless="${1==approvalList.pageable.pageNumber+1}">
+            <a th:href="@{'/approval/list/' + ${category} + '?page=0' + '&size=' + ${pSize}}" class="spanOn" data-ajax>처음</a>
+          </span>
+                    </li>
+                    <li>
+                        <span th:if="${1==approvalList.pageable.pageNumber+1}" class="spanOff">이전</span>
+                        <span th:unless="${1==approvalList.pageable.pageNumber+1}">
+            <a th:href="@{'/approval/list/' + ${category} + '?page=' + ${approvalList.pageable.pageNumber-1} + '&size=' + ${pSize}}"
+               class="spanOn" data-ajax>이전</a>
+          </span>
+                    </li>
+                    <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+                        <span th:if="${i==approvalList.pageable.pageNumber+1}" th:text="${i}" class="now"> </span>
+                        <a th:unless="${i==approvalList.pageable.pageNumber+1}"
+                           th:href="@{'/approval/list/' + ${category} + '?page=' + ${i-1} + '&size=' + ${pSize}}" data-ajax
+                           th:text="${i}"></a>
+                    </li>
+                    <li>
+                                <span th:if="${approvalList.totalPages==approvalList.pageable.pageNumber+1}"
+                                      class="spanOff">다음</span>
+                        <span th:unless="${approvalList.totalPages==approvalList.pageable.pageNumber+1}">
+            <a th:href="@{'/approval/list/' + ${category} + '?page=' + ${approvalList.pageable.pageNumber+1} + '&size=' + ${pSize}}"
+               class="spanOn" data-ajax>다음</a>
+          </span>
+                    </li>
+                    <li>
+                                <span th:if="${approvalList.totalPages==approvalList.pageable.pageNumber+1}"
+                                      class="spanOff">마지막</span>
+                        <span th:unless="${approvalList.totalPages==approvalList.pageable.pageNumber+1}">
+            <a th:href="@{'/approval/list/' + ${category} + '?page=' + ${approvalList.totalPages-1} + '&size=' + ${pSize}}"
+               class="spanOn" data-ajax>마지막</a>
+          </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </th:block>
+        <th:block th:unless="${not #lists.isEmpty(approvalList)}">
+            <p>결재문서 존재하지않음</p>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

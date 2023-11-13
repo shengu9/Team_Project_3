@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- head 부분 내용 -->
+  <meta charset="UTF-8">
+  <title>게시물 생성</title>
+</head>
+<body>
+<div id="loadedContent">
+<h1>게시물 생성</h1>
+<form id="createBoardForm">
+  <label for="title">제목</label>
+  <input type="text" id="title" name="title" required>
+  <label for="writer">작성자</label>
+  <input type="text" id="writer" name="writer" required>
+  <label for="boardPw">비밀번호</label>
+  <input type="password" id="boardPw" name="boardPw" required>
+  <br>
+  <label for="content">내용</label>
+  <textarea id="content" name="content" required></textarea>
+  <br>
+  <button type="button" id="create">게시물 등록</button>
+</form>
+<a href="/boards/list" id="redirection" data-ajax>게시판 목록으로 돌아가기</a>
+
+<script>
+    var randomName = "[[${randomName}]]";
+    document.getElementById("writer").value = randomName;
+
+    document.getElementById('create').addEventListener('click', function(event) {
+        createBoard();
+    })
+
+    function createBoard() {
+        // 입력된 제목, 작성자, 내용, 비밀번호를 가져옵니다.
+        var title = document.getElementById("title").value;
+        var writer = document.getElementById("writer").value;
+        var content = document.getElementById("content").value;
+        var boardPw = document.getElementById("boardPw").value;
+
+        // JSON 데이터를 생성합니다.
+        var jsonData = {
+            title: title,
+            writer: writer,
+            content: content,
+            boardPw: boardPw
+        };
+
+        // 서버로 JSON 데이터를 전송합니다.
+        fetch("/api/boards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(jsonData)
+        })
+        .then(function(response) {
+            if (response.ok) {
+                console.log("게시물이 성공적으로 생성되었습니다.");
+                const redirection = document.getElementById('redirection');
+                redirection.click();
+            } else {
+                console.error("게시물 생성 오류: " + response.status);
+            }
+        })
+        .catch(function(error) {
+            console.error("네트워크 오류: " + error);
+        });
+    }
+</script>
+
+</div>
+</body>
+</html>

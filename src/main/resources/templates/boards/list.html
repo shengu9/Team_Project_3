@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+</head>
+
+<body>
+
+<div id="loadedContent">
+    <h1>게시판 목록</h1>
+
+    <ul id="boardList">
+        <li th:each="board : ${boardPage.content}">
+            <a th:href="@{'/boards/detail/' + ${board.id}}" th:text="${board.title}" id="redirection" data-ajax></a>
+        </li>
+    </ul>
+
+    <a th:href="@{/boards/create}" data-ajax>새로운 게시물 작성</a>
+
+    <button id="prevBtn" data-ajax>이전</button>
+    <button id="nextBtn" data-ajax>다음</button>
+
+    <script>
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentPage = [[${boardPage.number} + 1]]; // Thymeleaf에서 페이지 번호를 0부터 시작하므로 1을 더해줍니다.
+
+        // 이전 페이지로 이동
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                fetchBoards(currentPage);
+            }
+        });
+
+        // 다음 페이지로 이동
+        nextBtn.addEventListener('click', () => {
+            currentPage++;
+            fetchBoards(currentPage);
+        });
+
+        // 클릭된 엘리먼트가 <a> 태그인지 확인하여 상세 페이지로 이동
+        document.getElementById('boardList').addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                            const redirection = document.getElementById('redirection');
+                const id = event.target.getAttribute('data-id');
+                redirection.click();
+
+            }
+        });
+
+        function fetchBoards(page) {
+            fetch(`/boards/list?page=${page}`)
+                .then(response => response.text())
+                .then(data => {
+                    docume nt.getElementById('boardList').innerHTML = data;
+                });
+        }
+    </script>
+</div>
+
+</body>
+
+</html>

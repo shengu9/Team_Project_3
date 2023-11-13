@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- head 부분 내용 -->
+  <meta charset="UTF-8">
+  <title>게시물 상세 정보</title>
+</head>
+<body>
+<div id="loadedContent">
+<h1>게시물 상세 정보</h1>
+<div>
+  <h2>제목: <span th:text="${board.title}"></span></h2>
+
+
+  <p>내용: <span th:text="${board.content}"></span></p>
+  <p>작성자: <span th:text="${board.writer}"></span></p>
+</div>
+  <!-- 수정 및 삭제 폼 -->
+  <form id="editDeleteForm" method="post">
+    <div>
+      <button type="button" id="editButton" data-ajax>게시물 수정</button>
+      <button type="button" id="deleteButton" data-ajax>게시물 삭제</button>
+    </div>
+    <div>
+      <label for="clientPassword">비밀번호:</label>
+      <input type="password" id="clientPassword" name="clientPassword" required>
+    </div>
+  </form>
+  <a href="/boards/list" id="redirection" data-ajax>게시판 목록으로 돌아가기</a>
+
+
+<script th:inline="javascript">
+    let id = /*[[${id}]]*/ null; // 상세 페이지에서 id를 JavaScript 변수에 할당
+
+
+const editButton = document.getElementById('editButton');
+editButton.addEventListener('click', () => {
+    const clientPasswordInput = document.getElementById('clientPassword');
+    const clientPassword = clientPasswordInput.value;
+
+    // 서버로 비밀번호 검증 요청을 보냅니다.
+    fetch(`/api/boards/verify/${id}?clientPassword=${clientPassword}`, {
+        method: 'POST', // POST 요청으로 변경
+    })
+    .then(response => {
+        if (response.status === 200) {
+            // 비밀번호가 일치하는 경우, 페이지 이동 또는 다른 작업 수행
+       const editRedirection = document.createElement('a'); // 새로운 <a> 엘리먼트를 생성합니다.
+        editRedirection.href = `/boards/edit/${id}`; // href 속성을 설정합니다.
+        editRedirection.setAttribute('id', 'editRedirection'); // id 속성을 설정합니다.
+        editRedirection.setAttribute('data-ajax', ''); // data-ajax 속성을 추가합니다.
+        document.body.appendChild(editRedirection); // body에 엘리먼트를 추가합니다.
+        editRedirection.click();
+        // editRedirection을 클릭하여 페이지 이동을 수행합니다.
+        } else {
+            // 비밀번호가 일치하지 않는 경우에 대한 처리
+            alert('비밀번호가 일치하지 않습니다. 수정 권한이 없습니다.');
+        }
+    })
+    .catch(error => {
+        console.error('비밀번호 확인 요청 실패: ' + error);
+    });
+});
+
+
+    const deleteButton = document.getElementById('deleteButton');
+    deleteButton.addEventListener('click', () => {
+        const clientPasswordInput = document.getElementById('clientPassword');
+        const clientPassword = clientPasswordInput.value;
+
+        // selectedId를 사용하여 게시물 ID를 가져와 요청을 보냅니다.
+        fetch(`/api/boards/${id}?clientPassword=${clientPassword}`, {
+    method: 'DELETE'
+    })
+    .then(response => response.text())
+    .then(message => {
+   if (message === '게시판 삭제 성공') {
+       alert(message);
+         const redirection = document.getElementById('redirection');
+                redirection.click();
+   } else {
+       alert('게시물 삭제 요청에 실패했습니다.');
+   }
+})
+.catch(error => {
+    console.error('게시물 삭제 요청 실패: ' + error);
+});
+    });
+</script>
+</div>
+</body>
+</html>

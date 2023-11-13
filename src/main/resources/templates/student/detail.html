@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>수강생정보 상세보기</title>
+    <link rel="stylesheet" th:href="@{/css/student/detail.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/student/detail.js}" data-dom-ready></script>
+    <script th:src="@{/js/student/delete.js}" data-dom-ready></script>
+</head>
+<body>
+<div id="loadedContent">
+<div class="container">
+    <div class="nav">
+        <div class="detail-con">
+            <div class="title">
+                <h1><span th:text="${student.studentName}" ></span>님 상세정보</h1>
+            </div>
+            <!-- 이미지 미리보기 영역 -->
+            <div id="image-preview" class="detail_image-preview"><img id="preview-image" th:src="${studentImageUrl}" alt="프로필 이미지" style="width: 100px; height: 100px;"></div>
+            <span class="image_btn">
+<!--                <button onclick="redirectToURL()" class="URLBtn">프로필 이미지 수정</button>-->
+                <a th:href="@{/student/updateImage/{studentId}(studentId=${student.studentId})}" data-ajax>프로필 이미지 수정</a>
+            </span>
+            <div class="detail">
+                <ul>
+<!--                    <span th:if="${false}" th:text="${student.studentId}"></span> <br> &lt;!&ndash; th:if="${false}" 입력 시 안보이게 처리 &ndash;&gt;-->
+                    <li>
+                        <span>이름</span>
+                        <span th:text="${student.studentName}"></span>
+                    </li>
+                    <li>
+                        <span>성별</span>
+                        <span th:text="${student.studentGender}"></span>
+                    </li>
+                    <li>
+                        <span>수강중인강의</span>
+                        <span th:text="${student.studentClass}"></span>
+                    </li>
+                    <li>
+                        <span>휴대전화번호</span>
+                        <span th:text="${student.studentPhone}"></span>
+                    </li>
+                    <li>
+                        <span>이메일</span>
+                        <span th:text="${student.studentEmail}"></span>
+                    </li>
+                    <li>
+                        <span>생년월일</span>
+                        <span th:text="${student.studentBirth}"></span>
+                    </li>
+                    <li>
+                        <span>주소</span>
+                        <span th:text="${student.studentStreetAddress + ', ' + student.studentDetailAddress}"></span>
+                    </li>
+<!--                    <li>-->
+<!--                        <span>권한</span> &lt;!&ndash; 필요없으면 숨기기 &ndash;&gt;-->
+<!--                        <span th:text="${employee.role}"></span>-->
+<!--                    </li>-->
+                    <li>
+                        <span>등록일</span>
+                        <span th:text="${#temporals.format(student.createTime, 'yyyy-MM-dd')}"></span>
+                    </li>
+
+                    <!-- 수정 (박상재) -->
+                    <!-- <li class="update">
+                        <span>
+                            <div class="update">
+                                <li>
+                                    <a th:href="@{/student/update/{studentId}(studentId=${student.studentId})}" data-ajax>수정</a>
+                                </li>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="delete">
+                        <input type="button" id="deleteButton" th:value="삭제" th:data-student-id="${student.studentId}">
+                    </li>
+                    <li>
+                        <a th:href="@{/student/studentList?page=0&subject=&search=}" data-ajax>수강생목록</a>
+                    </li>
+                    <a th:href="@{/student/studentList?page=0&subject=&search=}" id="redirection" data-ajax style="display: none;"></a> -->
+                    <div class="student-detail-submit_section">
+                        <a th:href="@{/student/update/{studentId}(studentId=${student.studentId})}" data-ajax>수정</a>
+                        <input type="button" id="deleteButton" th:value="삭제" th:data-student-id="${student.studentId}">
+                        <a th:href="@{/student/studentList?page=0&subject=&search=}" data-ajax>수강생목록</a>
+                        <a th:href="@{/student/studentList?page=0&subject=&search=}" id="redirection" data-ajax style="display: none;"></a>
+                    </div>
+                    <!-- 수정 끝 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Thymeleaf 표현식을 사용하여 employeeNo JavaScript 변수에 할당 -->
+<script th:inline="javascript">
+    var studentId = /*[[${student.studentId}]]*/ null;
+
+    function redirectToURL() {
+         if (studentId !== null) {
+           var dynamicURL = "/student/updateImage/" + studentId;
+           window.location.href = dynamicURL;
+         }
+    }
+</script>
+</body>
+</html>

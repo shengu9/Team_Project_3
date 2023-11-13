@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이메일 찾기</title>
+    <link rel="stylesheet" th:href="@{/css/employee/findId.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/employee/findId.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="find_box">
+        <form th:action="@{/api/findId}" method="post" class="find_form">
+            <h1 class="logo">아이디 찾기</h1>
+                <span>이메일</span><input type="email" id="employeeEmail" name="employeeEmail" placeholder="이메일 입력" required>
+                <span>휴대전화번호</span><input type="text" id="employeePhone" name="employeePhone" placeholder="휴대전화번호 입력" required>
+            <input type="submit" value="아이디 찾기" class="find_btn">
+            <div class="login">
+                <a th:href="@{/login}"><span>로그인</span></a>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 모달 창 -->
+<div id="findIdModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <p id="foundId"></p>
+        <button id="copyButton">복사</button> <!-- 복사 버튼 추가 -->
+    </div>
+</div>
+<!--<button th:onclick="@{location.href='/index'}">홈</button>-->
+</body>
+</html>
