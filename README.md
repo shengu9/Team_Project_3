@@ -25,7 +25,13 @@
 ![image](https://github.com/shengu9/Team_Project_3/assets/133622380/4a3afae6-530f-438f-b12c-66b1f27aa64b)
 
 ## 수행 결과
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/e0ff9c1d-f009-4d87-be73-20ece2b190f5)
+
 ![image](https://github.com/shengu9/Team_Project_3/assets/133622380/103f8c33-b2ce-4c43-91c8-31857451098f)
+
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/1900cf13-adad-4bc7-a21c-9f7c5e264e85)
+
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/804a776b-0984-4236-9c96-fbc0b461d43c)
 
 ![image](https://github.com/shengu9/Team_Project_3/assets/133622380/f5ee9592-5d08-4cb9-b920-da7ecdb2836f)
 
