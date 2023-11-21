@@ -25,7 +25,7 @@
 ![image](https://github.com/shengu9/Team_Project_3/assets/133622380/4a3afae6-530f-438f-b12c-66b1f27aa64b)
 
 ## 수행 결과
-![image](https://github.com/shengu9/Team_Project_3/assets/133622380/e0ff9c1d-f009-4d87-be73-20ece2b190f5)
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/4671fc49-563e-4e4b-8439-47d9051a534f)
 
 ![image](https://github.com/shengu9/Team_Project_3/assets/133622380/103f8c33-b2ce-4c43-91c8-31857451098f)
 
