@@ -1,4 +1,4 @@
-# 그룹웨어 프로젝트 - 그린 컴퓨터 아카데미
+# 그룹웨어 프로젝트 - 챗봇을 이용한 API활용
 
 ## 프로젝트 기간
 2023.10.27 ~ 2023.11.15
@@ -16,4 +16,17 @@
 	- 버스 기본 정보 조회
 	- 버스 정류장 조회
 	- 버스 정류장 도착시간 조회
+
+## 사용한 API
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/26fc9ba2-4fcc-4f51-a214-0e6b78ce9f5f)
+
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/24a24490-0e0c-40e8-b489-f8b33d62909c)
+
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/4a3afae6-530f-438f-b12c-66b1f27aa64b)
+
+## 수행 결과
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/103f8c33-b2ce-4c43-91c8-31857451098f)
+
+![image](https://github.com/shengu9/Team_Project_3/assets/133622380/f5ee9592-5d08-4cb9-b920-da7ecdb2836f)
+
 
