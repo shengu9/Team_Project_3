@@ -7,7 +7,7 @@
 ![image](https://github.com/shengu9/Team_Project_2/assets/133622380/6e12ef35-c4f0-4dc8-ad5d-6db73fe8c7d5)
 
 
-## Skiis
+## Skils
 <img width="1588" alt="스크린샷 2023-10-11 오후 10 57 03" src="https://github.com/AHNYUNKI/Team_Project/assets/121776373/b081b2b1-b914-4caf-a09d-089a88065c11">
 
 ## 담당 역할
